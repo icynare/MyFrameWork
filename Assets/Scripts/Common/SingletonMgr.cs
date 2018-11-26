@@ -1,0 +1,39 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SingletonMgr<T> : MonoBehaviour where T:MonoBehaviour {
+
+    protected static T _instance;
+    public static T Instance
+    {
+        get
+        {
+            if(_instance == null)
+            {
+                GameObject obj = GameObject.Find("GameManager");
+                if(obj == null)
+                {
+                    obj = new GameObject();
+                    DontDestroyOnLoad(obj);
+                    obj.name = "GameManager";
+                }
+                _instance = obj.GetComponent<T>();
+                if (_instance == null)
+                    obj.AddComponent<T>();
+            }
+            return _instance;
+        }
+    }
+
+    public virtual void Initialize()
+    {
+
+    }
+
+    public virtual void UnInitialize()
+    {
+
+    }
+
+}
