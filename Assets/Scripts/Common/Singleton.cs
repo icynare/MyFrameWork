@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton<T> where T:new() {
+public class Singleton<T> where T : new()
+{
 
     private static T _instance;
     private static readonly object _lock = new object();
@@ -11,9 +12,9 @@ public class Singleton<T> where T:new() {
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
-                lock(_lock)
+                lock (_lock)
                 {
                     _instance = new T();
                 }

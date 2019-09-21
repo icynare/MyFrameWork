@@ -59,7 +59,7 @@ public class Coroutine
 
 
 
-public class CoroutineManager : SingletonMgr<CoroutineManager> {
+public class CoroutineManager : SingletonManager<CoroutineManager> {
 
     public class CoroutineState
     {
