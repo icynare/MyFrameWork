@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UIBase {
-    public View _view;
+
+public abstract class UIBase
+{
+    public UIBase _view;
     public bool isVisible = false;
     private GameObject _root;
 
@@ -55,7 +57,7 @@ public abstract class UIBase {
     }
 
     public abstract string GetViewPath();
-    public abstract Layer GetLayer();
+    public abstract UILayer GetLayer();
 
 
 }

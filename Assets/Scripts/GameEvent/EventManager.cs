@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventMgr : EventSingleton<EventMgr> {
+public class EventManager : EventSingleton<EventManager> {
 
 }

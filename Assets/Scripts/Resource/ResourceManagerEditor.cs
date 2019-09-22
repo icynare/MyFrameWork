@@ -1,4 +1,4 @@
-﻿//#define DONT_USE_ASSET_BUNDLE
+﻿#define DONT_USE_ASSET_BUNDLE
 
 using System;
 using System.Collections;
@@ -16,7 +16,7 @@ public partial class ResourceManager : Singleton<ResourceManager>
     public override void Initialize()
     {
         base.Initialize();
-        RelativeResPath = Application.dataPath + "/StreamingAssetsTemp/";
+        RelativeResPath = "Assets/StreamingAssetsTemp/";
         _typeSuffixDic = new Dictionary<Type, string>()
         {
             [typeof(GameObject)] = ".prefab",
@@ -25,7 +25,7 @@ public partial class ResourceManager : Singleton<ResourceManager>
         };
     }
 
-    public T LoadRes<T>(string path, string resName) where T:UnityEngine.Object
+    public T LoadRes<T>(string path, string assetbunndleName, string resName) where T:UnityEngine.Object
     {
         if (!_typeSuffixDic.ContainsKey(typeof(T)))
         {
@@ -33,7 +33,7 @@ public partial class ResourceManager : Singleton<ResourceManager>
             return default;
         }
 
-        string resPath = RelativeResPath + resName + _typeSuffixDic[typeof(T)];
+        string resPath = RelativeResPath + path + resName + _typeSuffixDic[typeof(T)];
         T res = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(resPath);
         if (res == null)
         {
@@ -43,16 +43,16 @@ public partial class ResourceManager : Singleton<ResourceManager>
         return res;
     }
 
-    public void LoadResAsync<T>(string path, string resName, DataType.Callback<T> callback = null) where T:UnityEngine.Object
+    public IEnumerator LoadResAsync<T>(string path, string assebundleName, string resName, CallBack<T> callback = null) where T:UnityEngine.Object
     {
         if (!_typeSuffixDic.ContainsKey(typeof(T)))
         {
             PrintNotFound("类型错误");
             callback?.Invoke(null);
-            return;
+            yield break;
         }
 
-        string resPath = RelativeResPath + resName + _typeSuffixDic[typeof(T)];
+        string resPath = RelativeResPath  + path + resName + _typeSuffixDic[typeof(T)];
         T res = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(resPath);
         if (res == null)
         {
@@ -60,6 +60,17 @@ public partial class ResourceManager : Singleton<ResourceManager>
         }
         callback?.Invoke(res);
 
+    }
+
+ public T LoadResByAssetBundle<T>(AssetBundle assetBundle, string resName) where T : UnityEngine.Object
+    {
+        return default;
+    }
+
+    public IEnumerator LoadResByAssetBundleAsync<T>(AssetBundle assetBundle, string resName,
+        CallBack<T> callback = null) where T : UnityEngine.Object
+    {
+        yield break;
     }
 
     private void PrintNotFound(string str)

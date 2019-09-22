@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SingletonController : EventSingleton<SingletonController> {
+public class SingletonController<T>: EventSingleton<T> {
 
-    protected EventMgr globalDispatcher = EventMgr.Instance;
+    protected EventManager globalDispatcher = EventManager.Instance;
+    protected ViewBase _view;
 
 }

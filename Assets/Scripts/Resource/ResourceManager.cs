@@ -1,4 +1,4 @@
-﻿#define USE_ASSET_BUNDLE
+﻿//#define USE_ASSET_BUNDLE
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,12 +14,12 @@ public partial class ResourceManager : Singleton<ResourceManager>
     {
         base.Initialize();
         AssetBundleLoader.Instance.Initialize();
-        RelativeResPath = Application.streamingAssetsPath + "/";
+        RelativeResPath = PlatformUtil.GetStreamingAssetsPath();
     }
 
     public T LoadRes<T>(string path, string assetBundleName, string resName) where T : UnityEngine.Object
     {
-        string assetBundlePath = RelativeResPath + assetBundleName;
+        string assetBundlePath = $"{RelativeResPath}{path}{assetBundleName}";
         AssetBundle bundle = AssetBundleLoader.Instance.LoadAssetBundle(assetBundleName, assetBundlePath);
         if (bundle == null)
         {
@@ -36,9 +36,9 @@ public partial class ResourceManager : Singleton<ResourceManager>
         return res;
     }
 
-    public IEnumerator LoadResAsync<T>(string path, string assetBundleName, string resName, DataType.Callback<T> callback = null) where T : UnityEngine.Object
+    public IEnumerator LoadResAsync<T>(string path, string assetBundleName, string resName, CallBack<T> callback = null) where T : UnityEngine.Object
     {
-        string assetBundlePath = RelativeResPath + assetBundleName;
+        string assetBundlePath = $"{RelativeResPath}{path}{assetBundleName}";
         AssetBundle ab = null;
         yield return AssetBundleLoader.Instance.LoadAssetBundleAsync(assetBundleName, assetBundlePath,
             bundle => { ab = bundle; });
@@ -58,7 +58,7 @@ public partial class ResourceManager : Singleton<ResourceManager>
     }
 
     public IEnumerator LoadResByAssetBundleAsync<T>(AssetBundle assetBundle, string resName,
-        DataType.Callback<T> callback = null) where T : UnityEngine.Object
+        CallBack<T> callback = null) where T : UnityEngine.Object
     {
         AssetBundleRequest assetBundleRequest = assetBundle.LoadAssetAsync(resName);
         yield return assetBundleRequest;

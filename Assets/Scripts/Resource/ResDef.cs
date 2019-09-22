@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ResDef
 {
-    
+    public const string VIEW_PATH = "View/";
 }

@@ -12,12 +12,12 @@ public class SingletonManager<T> : MonoBehaviour where T : MonoBehaviour
         {
             if (_instance == null)
             {
-                GameObject obj = GameObject.Find("GameController");
+                GameObject obj = GameObject.Find("GameManager");
                 if (obj == null)
                 {
                     obj = new GameObject();
                     DontDestroyOnLoad(obj);
-                    obj.name = "GameController";
+                    obj.name = "GameManager";
                 }
                 _instance = obj.GetComponent<T>();
                 if (_instance == null)

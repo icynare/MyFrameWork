@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using CommonFramework.UI;
 using UnityEngine;
 
 public class Test : MonoBehaviour
@@ -8,6 +7,7 @@ public class Test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ResourceManager.Instance.Initialize();
         UIManager.Instance.Initialize();
     }
 

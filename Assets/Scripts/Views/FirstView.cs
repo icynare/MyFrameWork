@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using CommonFramework.UI;
 using UnityEngine;
 
 public class FirstView : ViewBase

@@ -24,7 +24,7 @@ public class AssetBundleLoader : Singleton<AssetBundleLoader>
         return ab;
     }
 
-    public IEnumerator LoadAssetBundleAsync(string bundleName, string bundlePath, DataType.Callback<AssetBundle> callback = null)
+    public IEnumerator LoadAssetBundleAsync(string bundleName, string bundlePath, CallBack<AssetBundle> callback = null)
     {
         if (_loadedAssetBundles.TryGetValue(bundleName, out AssetBundle ab))
         {
